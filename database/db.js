@@ -1,7 +1,7 @@
 const mongoose= require('mongoose')
 const admin = require('firebase-admin');
 require('dotenv').config()
-//process.env.NODE_TLS_REJECT_UNAUTHORIZED = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
 
 const dbMongoConection = async() => {
     try{
