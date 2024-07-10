@@ -7,10 +7,11 @@ const Usuario = require('../models/usuario')
 
 //const firestore =dbFirebaseConection()
 
-const getUsuarios = (req, res)=> {
-    console.log(req.body)
+const getUsuarios = async (req, res= response)=> {
+    const usuarios = await Usuario.find({}, 'nombre email curp telefono, role pdf')
     return res.json({
-        msg: 'Usuario obtenido'
+        ok: true,
+        usuarios
     })
 }
 
@@ -51,10 +52,44 @@ const createUserio = async(req, res=response)=> {
     }
 }
 
-const updatedUsuario = (req, res)=> {
-    return res.json({
-        msg: 'Usuario actualizado'
-    })
+const updatedUsuario = async (req, res= response)=> {
+
+    const uid = req.params.id
+
+    try {
+        const existeusuarioDB = await Usuario.findById(uid)
+
+        if(!existeusuarioDB) {
+            res.status(404).json({
+                ok: true,
+                msg: 'No existe el usuario'
+            })
+        }
+
+        const { password, email, ...campos} = req.body
+
+        if(existeusuarioDB.email != email) {
+            const existeEmail = await Usuario.findOne({email})
+            if(existeEmail) {
+                return res.status(400).json({
+                    ok: false,
+                    msg: 'Ya existe un usuario con ese correo'
+                })
+            }
+        }
+
+        campos.email = email
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
+
+        res.status(200).json({
+            ok: true,
+            msg: 'Usuario actualizado exitosamente!'
+        })
+
+    } catch(error) {
+        console.log(error)
+        res.status(500).json('Error inesperado')
+    }
 }
 
 const deleteUsuario = (req, res)=> {

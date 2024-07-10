@@ -15,7 +15,14 @@ router.post('/',
     ], 
     createUserio)
 
-router.put('/:id', updatedUsuario)
+router.put('/:id', 
+    [
+        check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+        check('password', 'El password es obligatorio').not().isEmpty(),
+        check('email', 'El email es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    updatedUsuario)
 
 router.delete('/:id', deleteUsuario)
 

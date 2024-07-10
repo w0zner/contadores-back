@@ -6,7 +6,7 @@ require('dotenv').config()
 const dbMongoConection = async() => {
     try{
         
-        await mongoose.connect(process.env.MONGODB_STRING_CONNECTION)
+        await mongoose.connect(process.env.MONGODB_LOCAL_STRING_CONNECTION)
                     .then(()=> console.log('Se conecto a la Base de datos MongoDB'))
                     .catch((err)=> console.log('MongoDB connection error ', err))
         
