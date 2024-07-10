@@ -92,10 +92,30 @@ const updatedUsuario = async (req, res= response)=> {
     }
 }
 
-const deleteUsuario = (req, res)=> {
-    return res.json({
-        msg: 'Usuario eliminado'
-    })
+const deleteUsuario = async (req, res= response)=> {
+    const uid = req.params.id
+
+    try {
+        const existeusuarioDB = await Usuario.findById(uid)
+
+        if(!existeusuarioDB) {
+            res.status(404).json({
+                ok: true,
+                msg: 'No existe el usuario'
+            })
+        }
+
+      await Usuario.findByIdAndDelete(uid)
+
+        res.status(200).json({
+            ok: true,
+            msg: 'Usuario eliminado exitosamente!'
+        })
+
+    } catch(error) {
+        console.log(error)
+        res.status(500).json('Error inesperado')
+    }
 }
 
 module.exports = {
