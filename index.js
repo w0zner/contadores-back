@@ -19,7 +19,9 @@ dbMongoConection()
 
 app.use(express.json())
 
-app.use('', require('./routes/usuarios'))
+app.use('/login', require('./routes/auth'))
+app.use('/usuarios', require('./routes/usuarios'))
+app.use('/documentos', require('./routes/documentos'))
 
 app.listen(process.env.PORT, ()=> {
     console.log(`Conectado al puerto ${ process.env.PORT }`)

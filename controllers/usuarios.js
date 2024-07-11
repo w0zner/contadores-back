@@ -1,29 +1,20 @@
 const { response } = require('express')
 const bcrypt = require('bcryptjs')
 const Usuario = require('../models/usuario')
-//const User = require('../modelos/usuario')
-//const { dbFirebaseConection } = require('../database/db')
-
-
-//const firestore =dbFirebaseConection()
 
 const getUsuarios = async (req, res= response)=> {
     const usuarios = await Usuario.find({}, 'nombre email curp telefono, role pdf')
     return res.json({
         ok: true,
-        usuarios
+        usuarios,
+        uid: req.uid
     })
 }
 
 const createUserio = async(req, res=response)=> {
     const {nombre, email, password} = req.body
     
-
-    //const plainObject = Object.assign({}, usuario);
     try {
-        //const docRef = firestore.collection('prueba').doc(nombre)
-        //await docRef.set(plainObject)
-
         const existeEmail = await Usuario.findOne({email})
 
         if(existeEmail) {
@@ -44,8 +35,6 @@ const createUserio = async(req, res=response)=> {
             ok: true,
             usuario
         })
-
-        //res.status(201).json({usuario: docRef})
     } catch(error) {
         console.log(error)
         res.status(500).json(error)
