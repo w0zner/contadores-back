@@ -17,9 +17,38 @@ router.get('/', getDocumentos)
 
 router.get('/editar-documento/:id', getDocumentosID)
 router.get('/mis-documentos/:id', getMisDocumentos)
-router.post('/', crearDocumento)
-router.put('/editar-documento/:id', editarDocumento)
-router.put('/:id', actualizarDocumento)
-router.delete('/:id', eliminarDocumento)
+
+//Crear documento después de crear el documento
+router.post('/', 
+[
+    validarToken,
+    check('nombre', 'el nombre del documento es requerido').not().isEmpty(),
+    validarCampos
+], 
+crearDocumento)
+
+//Actualizar documento después de crear el documento
+router.put('/:id',
+[
+    validarToken,
+    check('nombre', 'el nombre del documento es requerido').not().isEmpty(),
+    validarCampos
+],
+actualizarDocumento)
+
+//Actualizar documento seleccionado
+router.put('/editar-documento/:id',
+[
+    validarToken,
+    check('nombre', 'el nombre del documento es requerido').not().isEmpty(),
+    validarCampos
+],
+editarDocumento)
+
+router.delete('/:id',
+[
+    validarToken
+],
+eliminarDocumento)
 
 module.exports = router
