@@ -2,25 +2,67 @@ const {response} = require('express')
 const Documento = require('../models/documento')
 const { async } = require('@firebase/util')
 
-const getDocumentos = async (req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo documentos'
-    })
+const getDocumentos = async (req, res=response) => {  
+    try{
+
+        const documentos = await Documento.find().populate('usuario', 'nombre fecha pdf')
+
+        res.json({
+            ok: true,
+            documentos
+        })
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los documentos'
+        })
+    }
 }
 
 const getDocumentosID = async (req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo documentos por ID'
-    })
+    const id= req.params.id
+    try{
+        const documento = await Documento.findById(id).populate('usuario', 'nombre fecha pdf')
+        if(!documento) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Documento no encontrado'
+            })
+        }
+
+        res.json({
+            ok: true,
+            documento
+        })
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los documentos'
+        })
+    }
 }
 
 const getMisDocumentos = async (req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo mis documentos'
-    })
+    const id= req.params.id
+    try{
+        const documentos = await Documento.find({ usuario: id }).populate('usuario', 'nombre fecha pdf')
+
+        res.json({
+            ok: true,
+            documentos
+        })
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al obtener los documentos'
+        })
+    }
 }
 
 const crearDocumento = async (req, res=response) => {

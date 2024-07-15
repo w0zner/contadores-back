@@ -7,33 +7,15 @@ const { dbFirebaseConection, dbMongoConection } = require('./database/db')
 const app= express()
 
 dbMongoConection()
-//const firestore =dbFirebaseConection()
-
-/* app.get('/', (req, res)=> {
-    //res.send('Conexion exitosa')
-    getDocument().catch(console.error);
-    res.json({
-        msg: 'Conexion exitosa'
-    })
-}) */
 
 app.use(express.json())
 
 app.use('/login', require('./routes/auth'))
 app.use('/usuarios', require('./routes/usuarios'))
+app.use('/buscar', require('./routes/buscar'))
 app.use('/documentos', require('./routes/documentos'))
+app.use('/upload', require('./routes/upload'))
 
 app.listen(process.env.PORT, ()=> {
     console.log(`Conectado al puerto ${ process.env.PORT }`)
 })
-
-/* async function getDocument() {
-    const docRef = firestore.collection('prueba').doc('probando');
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      console.log('No such document!');
-    } else {
-      console.log('Document data:', doc.data());
-    }
-  }
- */
