@@ -43,6 +43,19 @@ const login = async (req, res= response) => {
     }
 }
 
+const refreshToken = async (req, res= response) => {
+    const uid = req.uid
+    const token = await creatToken(uid)
+    const usuario = await Usuario.findById(uid)
+
+    res.json({
+        ok: true,
+        token,
+        usuario
+    })
+}
+
 module.exports = {
-    login
+    login,
+    refreshToken
 }

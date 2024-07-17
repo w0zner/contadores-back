@@ -1,4 +1,5 @@
 const express= require('express')
+const cors = require('cors')
 require('dotenv').config()
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
 const { dbFirebaseConection, dbMongoConection } = require('./database/db')
@@ -7,6 +8,8 @@ const { dbFirebaseConection, dbMongoConection } = require('./database/db')
 const app= express()
 
 dbMongoConection()
+
+app.use(cors())
 
 app.use(express.json())
 
