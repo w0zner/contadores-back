@@ -2,6 +2,7 @@ const {response} = require('express')
 const bcrypt = require('bcryptjs')
 const Usuario = require('../models/usuario')
 const { creatToken } = require('../helpers/jwt')
+const { getMenu } = require('../helpers/menu')
 
 const login = async (req, res= response) => {
 
@@ -31,7 +32,8 @@ const login = async (req, res= response) => {
         res.json({
             ok: false,
             msg: 'Usuario: [' + usuarioDB.nombre + '] logueado',
-            token
+            token,
+            menu: getMenu(usuarioDB.role)
         })
 
     } catch(error){
@@ -51,7 +53,8 @@ const refreshToken = async (req, res= response) => {
     res.json({
         ok: true,
         token,
-        usuario
+        usuario,
+        menu: getMenu(usuario.role)
     })
 }
 
