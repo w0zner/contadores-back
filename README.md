@@ -1,6 +1,6 @@
 # Contadores-back
 
-Este proyecto es una API backend para la gestión de una aplicación para contadores, desarrollada en Node.js con Express y estructurada en una arquitectura modular para un mantenimiento y escalabilidad óptimos.
+Este proyecto es una API backend para la gestión de una aplicación para contadores, desarrollada en Node.js version v18.17.1 con Express y estructurada en una arquitectura modular para un mantenimiento y escalabilidad óptimos.
 
 ## Características
 
