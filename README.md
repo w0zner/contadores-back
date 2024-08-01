@@ -4,7 +4,7 @@ Este proyecto es una API backend para la gestión de una aplicación para contad
 
 ## Características
 
-- **Autenticación**: Middleware para la autenticación de usuarios.
+- **Autenticación**: Middleware para la autenticación de usuarios con JWT.
 - **Gestión de ABM**: CRUD para contadores.
 - **Base de Datos**: Integración con base de datos MongoDB.
 - **Subida de Archivos**: Funcionalidad para subir documentos relacionados.
