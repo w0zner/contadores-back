@@ -4,7 +4,7 @@ const Usuario = require('../models/usuario')
 const { creatToken } = require('../helpers/jwt')
 
 const getUsuarios = async (req, res= response)=> {
-    const usuarios = await Usuario.find({}, 'nombre email curp telefono, role pdf')
+    const usuarios = await Usuario.find({}, 'nombre email curp telefono, role pdf estado')
     return res.json({
         ok: true,
         usuarios,

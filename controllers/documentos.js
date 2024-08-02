@@ -91,6 +91,8 @@ const crearDocumento = async (req, res=response) => {
 const editarDocumento = async (req, res=response) => {
     const id = req.params.id
     const uid = req.uid
+    //const cambioUsuario = req.body.usuario
+
 
     try{
         const documento = Documento.findById(id)

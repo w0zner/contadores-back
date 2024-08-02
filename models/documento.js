@@ -11,6 +11,17 @@ const DocumentoSchema = Schema({
     fecha: {
         type: String
     },
+    estado: {
+        type: String,
+        default: 'PENDIENTE'
+    },
+    tipo: {
+        type: String,
+        default: 'DOCUMENTO'
+    },
+    observacion: {
+        type: String
+    },
     usuario: {
         required: true,
         type: Schema.Types.ObjectId,

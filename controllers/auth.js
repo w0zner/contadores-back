@@ -18,6 +18,13 @@ const login = async (req, res= response) => {
             })
         }
 
+        if(!usuarioDB.estado) {
+            return res.status(403).json({
+                ok: false,
+                msg: 'Usuario inactivo'
+            })
+        }
+
         const passwordDB = bcrypt.compareSync(password, usuarioDB.password)
         if(!passwordDB) {
             return res.status(404).json({
