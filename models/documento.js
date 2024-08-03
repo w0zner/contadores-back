@@ -13,11 +13,11 @@ const DocumentoSchema = Schema({
     },
     estado: {
         type: String,
-        default: 'PENDIENTE'
+        default: 'INCOMPLETO'
     },
     tipo: {
         type: String,
-        default: 'DOCUMENTO'
+        default: 'FACTURA'
     },
     observacion: {
         type: String
