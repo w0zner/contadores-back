@@ -5,8 +5,8 @@ const { async } = require('@firebase/util')
 const getDocumentos = async (req, res=response) => {  
     try{
 
-        const documentos = await Documento.find().populate('usuario', 'nombre fecha pdf')
-
+        const documentos = await Documento.find().populate('usuario usuarioCreacion', 'nombre fecha pdf')
+        console.log(documentos)
         res.json({
             ok: true,
             documentos
@@ -49,8 +49,8 @@ const getDocumentosID = async (req, res=response) => {
 const getMisDocumentos = async (req, res=response) => {
     const id= req.params.id
     try{
-        const documentos = await Documento.find({ usuario: id }).populate('usuario', 'nombre fecha pdf')
-
+        const documentos = await Documento.find({ usuario: id }).populate('usuario usuarioCreacion', 'nombre fecha pdf')
+        console.log(documentos)
         res.json({
             ok: true,
             documentos
@@ -68,6 +68,7 @@ const getMisDocumentos = async (req, res=response) => {
 const crearDocumento = async (req, res=response) => {
     const uid = req.uid
     const documento = new Documento({
+        usuarioCreacion: uid,
         usuario: uid,
         ...req.body
     })

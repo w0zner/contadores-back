@@ -12,6 +12,29 @@ const getUsuarios = async (req, res= response)=> {
     })
 }
 
+const getUsuario = async (req, res= response) => {
+    const uid = req.params.id
+
+    try {
+        const usuario = await Usuario.findById(uid)
+
+        if(!usuario) {
+            res.status(404).json({
+                ok: true,
+                msg: 'No existe el usuario'
+            })
+        }
+
+        res.status(200).json({
+            ok: true,
+            usuario
+        })        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
+    }
+}
+
 const createUserio = async(req, res=response)=> {
     const {nombre, email, password} = req.body
     
@@ -112,5 +135,5 @@ const deleteUsuario = async (req, res= response)=> {
 }
 
 module.exports = {
-    getUsuarios, createUserio, updatedUsuario, deleteUsuario
+    getUsuarios, createUserio, updatedUsuario, deleteUsuario, getUsuario
 }

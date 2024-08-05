@@ -26,6 +26,11 @@ const DocumentoSchema = Schema({
         required: true,
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
+    },
+    usuarioCreacion: {
+        required: true,
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario'
     }
 })
 
