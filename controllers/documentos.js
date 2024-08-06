@@ -49,7 +49,7 @@ const getDocumentosID = async (req, res=response) => {
 const getMisDocumentos = async (req, res=response) => {
     const id= req.params.id
     try{
-        const documentos = await Documento.find({ usuario: id }).populate('usuario usuarioCreacion', 'nombre fecha pdf')
+        const documentos = await Documento.find({ usuarioCreacion: id }).populate('usuario usuarioCreacion', 'nombre fecha pdf')
         console.log(documentos)
         res.json({
             ok: true,

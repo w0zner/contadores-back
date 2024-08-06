@@ -95,6 +95,7 @@ const updatedUsuario = async (req, res= response)=> {
         }
 
         campos.email = email
+        campos.role = existeusuarioDB.role
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
 
         res.status(200).json({
